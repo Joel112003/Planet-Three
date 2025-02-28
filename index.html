@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planets</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Helvetica", "Arial", "sans-serif"],
+            },
+            keyframes: {
+              'nav-reveal': {
+                '0%': { transform: 'translateY(-50px)', opacity: 0 },
+                '100%': { transform: 'translateY(0)', opacity: 1 }
+              },
+              'text-shimmer': {
+                '0%': { backgroundPosition: '-200% 0' },
+                '100%': { backgroundPosition: '200% 0' }
+              }
+            },
+            animation: {
+              'nav-reveal': 'nav-reveal 0.8s ease-out forwards',
+              'text-shimmer': 'text-shimmer 3s linear infinite'
+            }
+          },
+        },
+      };
+    </script>
+    <style>
+      .menu-item {
+        position: relative;
+      }
+
+      .menu-item::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: white;
+        transition: width 0.3s ease;
+      }
+
+      .menu-item:hover::after {
+        width: 100%;
+      }
+
+      .text-shimmer {
+        background: linear-gradient(90deg, #ffffff, #6b7280, #ffffff);
+        background-size: 200% auto;
+        color: transparent;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    </style>
+  </head>
+  <body class="relative bg-black">
+    <!-- Stars background -->
+    <div id="stars-container" class="fixed top-0 left-0 w-full h-full z-0"></div>
+
+    <!-- Space background with animated planets -->
+    <div class="w-full h-screen overflow-hidden relative">
+      <!-- Content layer -->
+      <div class="absolute top-0 left-0 z-30 w-full h-full text-white font-sans">
+        <!-- Animated Navbar -->
+        <nav class="w-full flex justify-between items-center py-6 px-10 opacity-0 animate-nav-reveal" style="animation-delay: 0.5s;">
+          <h2 class="text-3xl font-light text-shimmer animate-text-shimmer  ">Planets</h2>
+          <ul class="flex space-x-10">
+            <li class="opacity-0 animate-nav-reveal" style="animation-delay: 0.7s;">
+              <a href="#" class="menu-item text-lg hover:text-gray-300 transition-all duration-500"><span class="text-shimmer animate-text-shimmer  ">Home</span></a>
+            </li>
+            <li class="opacity-0 animate-nav-reveal" style="animation-delay: 0.9s;">
+              <a href="#" class="menu-item text-lg hover:text-gray-300 transition-all duration-500"><span class="text-shimmer animate-text-shimmer  ">Planets</span></a>
+            </li>
+            <li class="opacity-0 animate-nav-reveal" style="animation-delay: 1.1s;">
+              <a href="#" class="menu-item text-lg hover:text-gray-300 transition-all duration-500"><span class="text-shimmer animate-text-shimmer  ">Gallery</span></a>
+            </li>
+            <li class="opacity-0 animate-nav-reveal" style="animation-delay: 1.3s;">
+              <a href="#" class="menu-item text-lg hover:text-gray-300 transition-all duration-500"><span class="text-shimmer animate-text-shimmer  ">Contact</span></a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="absolute top-[8%] left-1/2 -translate-x-1/2 text-center">
+          <div class="w-full h-[9em] overflow-hidden">
+            <h1 class="heading h-full text-9xl font-light tracking-tighter font-['Bellina']">Earth</h1>
+            <h1 class="heading h-full text-9xl font-light tracking-tighter font-['Bellina']">Scilla</h1>
+            <h1 class="heading h-full text-9xl font-light tracking-tighter font-['Bellina']">Volcanic</h1>
+            <h1 class="heading h-full text-9xl font-light tracking-tighter font-['Bellina']">Venus</h1>
+          </div>
+          <p class="text-md text-gray-300 max-w-md mx-auto font-['Gilroy']">
+            Earth is the third planet from the Sun and the only known celestial body to support life.
+          </p>
+          <div class="w-96 h-px bg-gradient-to-r from-transparent via-white to-transparent mt-4"></div>
+        </div>
+      </div>
+      <canvas id="canvas"></canvas>
+    </div>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
